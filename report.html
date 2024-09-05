@@ -34,6 +34,23 @@
             const today = new Date().toISOString().split('T')[0];
             dateInput.value = today;
         }
+        function clearAttendanceRecords() {
+        // Ask for a password before allowing the deletion
+        const enteredPassword = prompt('Enter the password to delete all records:');
+        const authorizedPassword ="1234"
+
+        // Check if the entered password is correct
+        if (enteredPassword === authorizedPassword) {
+            if (confirm('Are you sure you want to delete all attendance records?')) {
+                localStorage.removeItem('attendanceRecords');
+                alert('All attendance records have been deleted.');
+            }
+        } else {
+            alert('Incorrect password. Deletion not allowed.');
+        }
+}
+
+
     </script>
 </head>
 <body onload="loadCurrentDate()">
@@ -62,6 +79,8 @@
             <input type="date" id="date" name="date" class="small-input"><br>
 
             <button onclick="displayReport()">View Report</button>
+            <button onclick="clearAttendanceRecords()">Delete All Records</button>
+
 
             <h2>Attendance Report</h2>
             <div id="presentCount">Total Present: 0</div>
