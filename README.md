@@ -22,9 +22,16 @@ The system offers the following features:
 
 Here are some screenshots of the project:
 
+![Home Page](Images/Home.png)
+
 ![Attendance Form](Images/Attendace.png)
 
-![Attendance Report](Images/report.png)
+![Attendance Report](Images/Report.png)
+
+![Course Report](Images/Report_by_Course.png)
+
+
+
 
 ## 🌟 Features
 
