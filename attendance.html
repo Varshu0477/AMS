@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mark Attendance</title>
     <link rel="stylesheet" href="styles.css">
+
     <script>
-       const studentData = {
+
+     const studentData = {
     "Kuushal Kamboji": "22BTRCN155",
     "Mathew Abraham Leo": "22BTRCN157",
     "MANOJ KUMAR LINGUTLA": "22BTRCN158",
@@ -73,38 +75,53 @@
     "RAGHAVAN S": "22BTTCN004"
 };
 
+function updateUSN() {
+    const nameSelect = document.getElementById('name');
+    const usnInput = document.getElementById('usn');
+    const selectedName = nameSelect.value;
+    usnInput.value = studentData[selectedName] || '';
+}
 
-        function updateUSN() {
-            const nameSelect = document.getElementById('name');
-            const usnInput = document.getElementById('usn');
-            const selectedName = nameSelect.value;
-            usnInput.value = studentData[selectedName] || '';
+function saveAttendance() {
+    const name = document.getElementById('name').value;
+    const usn = document.getElementById('usn').value;
+    const course = document.getElementById('course').value;
+    const attendance = document.getElementById('attendance').value;
+    const date = document.getElementById('date').value;
+
+    if (name && usn && course && attendance && date) {
+        let attendanceRecords = JSON.parse(localStorage.getItem('attendanceRecords')) || [];
+        
+        // Check if the record already exists
+        const existingRecord = attendanceRecords.find(record => 
+            record.name === name && 
+            record.course === course && 
+            record.date === date
+        );
+
+        if (existingRecord) {
+            alert('Attendance already recorded for this student on this day.');
+        } else {
+            attendanceRecords.push({ name, usn, course, attendance, date });
+            localStorage.setItem('attendanceRecords', JSON.stringify(attendanceRecords));
+            alert('Attendance saved locally.');
+            document.querySelector('form').reset(); // Reset the form
         }
+    } else {
+        alert('Please fill out all fields.');
+    }
+}
 
-        function saveAttendance() {
-            const name = document.getElementById('name').value;
-            const usn = document.getElementById('usn').value;
-            const course = document.getElementById('course').value;
-            const attendance = document.getElementById('attendance').value;
-            const date = document.getElementById('date').value;
+function loadCurrentDate() {
+    const dateInput = document.getElementById('date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.value = today;
+}
 
-            if (name && usn && course && attendance && date) {
-                let attendanceRecords = JSON.parse(localStorage.getItem('attendanceRecords')) || [];
-                attendanceRecords.push({ name, usn, course, attendance, date });
-                localStorage.setItem('attendanceRecords', JSON.stringify(attendanceRecords));
-                alert('Attendance saved locally.');
-            } else {
-                alert('Please fill out all fields.');
-            }
-        }
-
-        function loadCurrentDate() {
-            const dateInput = document.getElementById('date');
-            const today = new Date().toISOString().split('T')[0];
-            dateInput.value = today;
-        }
     </script>
+
 </head>
+
 <body onload="loadCurrentDate()">
     <header>
         <h1>Mark Attendance</h1>
