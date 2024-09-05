@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Individual Report</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function displayAttendanceCount() {
+            const course = document.getElementById('course').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const records = JSON.parse(localStorage.getItem('attendanceRecords')) || [];
+
+            const filteredRecords = records.filter(record => {
+                return record.course === course && record.date >= startDate && record.date <= endDate && record.attendance.toLowerCase() === "present";
+            });
+
+            const studentAttendance = {};
+
+            filteredRecords.forEach(record => {
+                if (!studentAttendance[record.name]) {
+                    studentAttendance[record.name] = 0;
+                }
+                studentAttendance[record.name]++;
+            });
+
+            let countTable = '<tr><th>Name</th><th>Classes Attended</th></tr>';
+            for (const name in studentAttendance) {
+                countTable += `<tr><td>${name}</td><td>${studentAttendance[name]}</td></tr>`;
+            }
+
+            document.getElementById('countTable').innerHTML = countTable;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1> Individual Report</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="attendance.html">Mark Attendance</a></li>
+                <li><a href="report.html">View Reports</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <label for="course">Select Course:</label>
+            <select id="course" name="course">
+                <option value="FAI">FAI</option>
+                <option value="EML">EML</option>
+                <option value="NOSQL">NOSQL</option>
+                <option value="BCS">BCS</option>
+                <option value="ACN">ACN</option>
+            </select><br>
+
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate"><br>
+
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate"><br>
+
+            <button onclick="displayAttendanceCount()">Generate Report</button>
+
+            <h2>Classes Attended Count</h2>
+            <table id="countTable" border="1" cellspacing="0" cellpadding="5"></table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Attendance Management System</p>
+    </footer>
+</body>
+</html>

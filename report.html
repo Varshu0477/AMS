@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Attendance Reports</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function displayReport() {
+            const course = document.getElementById('course').value;
+            const selectedDate = document.getElementById('date').value;
+            const records = JSON.parse(localStorage.getItem('attendanceRecords')) || [];
+
+            const filteredRecords = records.filter(record => {
+                return record.course === course && record.date === selectedDate;
+            });
+
+            let reportTable = '<tr><th>Name</th><th>USN</th><th>Attendance</th></tr>';
+            let presentCount = 0;
+
+            filteredRecords.forEach(record => {
+                reportTable += `<tr><td>${record.name}</td><td>${record.usn}</td><td>${record.attendance}</td></tr>`;
+                if (record.attendance === 'present') {
+                    presentCount++;
+                }
+            });
+
+            document.getElementById('reportTable').innerHTML = reportTable;
+            document.getElementById('presentCount').textContent = `Total Present: ${presentCount}`;
+        }
+
+        function loadCurrentDate() {
+            const dateInput = document.getElementById('date');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.value = today;
+        }
+    </script>
+</head>
+<body onload="loadCurrentDate()">
+    <header>
+        <h1>View Attendance Reports</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="attendance.html">Mark Attendance</a></li>
+                <li><a href="report_by_course.html"> Individual Report</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <label for="course">Course:</label>
+            <select id="course" name="course" class="small-input">
+                <option value="FAI">FAI</option>
+                <option value="EML">EML</option>
+                <option value="NOSQL">NOSQL</option>
+                <option value="BCS">BCS</option>
+                <option value="ACN">ACN</option>
+            </select><br>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" class="small-input"><br>
+
+            <button onclick="displayReport()">View Report</button>
+
+            <h2>Attendance Report</h2>
+            <div id="presentCount">Total Present: 0</div>
+            <table id="reportTable" border="1" cellspacing="0" cellpadding="5"></table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Attendance Management System</p>
+    </footer>
+</body>
+</html>

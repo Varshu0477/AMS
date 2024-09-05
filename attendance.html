@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Attendance</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+       const studentData = {
+    "Kuushal Kamboji": "22BTRCN155",
+    "Mathew Abraham Leo": "22BTRCN157",
+    "MANOJ KUMAR LINGUTLA": "22BTRCN158",
+    "Neel Kariappa M M": "22BTRCN161",
+    "Sashank Maddula": "22BTRCN162",
+    "Rohith Madineni": "22BTRCN163",
+    "Rakshith Kumar.M": "22BTRCN167",
+    "Mohamed Faiz V S": "22BTRCN173",
+    "SAI HASHWANTH REDDY M": "22BTRCN175",
+    "Deepthi. Mullaguru": "22BTRCN176",
+    "Sai venkata praneeth myla": "22BTRCN177",
+    "N Bala Mohan": "22BTRCN178",
+    "Nakul Govind S": "22BTRCN180",
+    "SANTHOSH REDDY NAMALA": "22BTRCN183",
+    "MOURYA VARDHAN GOWD NEELLA": "22BTRCN186",
+    "Punarvika Neeluri": "22BTRCN187",
+    "Nikhil Reddy K": "22BTRCN188",
+    "Niraj Shah Rauniyar": "22BTRCN191",
+    "Omswaroop T M": "22BTRCN193",
+    "PARAS": "22BTRCN199",
+    "Parth Jain": "22BTRCN200",
+    "Sharani Sai.P": "22BTRCN201",
+    "Pooja.H": "22BTRCN205",
+    "Rahul Rajasekharan Menon": "22BTRCN222",
+    "Rakesh M": "22BTRCN224",
+    "RATHAN S": "22BTRCN226",
+    "Rohith s": "22BTRCN234",
+    "saivenkatpujari224@gmail.com": "22BTRCN240",
+    "Sanskriti Saxena": "22BTRCN246",
+    "Shaik Nida Fathima": "22BTRCN252",
+    "Shashank. S": "22BTRCN257",
+    "Shikhar S": "22BTRCN260",
+    "Shreya Badarish": "22BTRCN262",
+    "Shreya k": "22BTRCN263",
+    "Shrutakeval H A": "22BTRCN267",
+    "Shyam Sundar G": "22BTRCN270",
+    "Sindhu R": "22BTRCN272",
+    "Sirrisathwik": "22BTRCN273",
+    "Sreenath S": "22BTRCN275",
+    "Sreerag Pradeepan": "22BTRCN276",
+    "SREERAM ES": "22BTRCN277",
+    "Sudeeksha Bhat": "22BTRCN285",
+    "Sushmith S Mokashi": "22BTRCN289",
+    "BHAVYA SRI TALARI": "22BTRCN290",
+    "Tamil Iniyan KS": "22BTRCN291",
+    "Tanni Saha Puja": "22BTRCN294",
+    "Tanvi S": "22BTRCN295",
+    "Thanu Shree K": "22BTRCN301",
+    "Trishlaa S": "22BTRCN304",
+    "Mokshith V": "22BTRCN307",
+    "Hima Bindhu .V": "22BTRCN308",
+    "Bindhu sri reddy.V": "22BTRCN309",
+    "Varshitha Y": "22BTRCN313",
+    "Varun.R": "22BTRCN314",
+    "Varuni L": "22BTRCN316",
+    "Vasundhara parihar": "22BTRCN317",
+    "YASH KUMAR JAIN M": "22BTRCN327",
+    "YASHWANT PATEL": "22BTRCN329",
+    "Chandana.Y": "22BTRCN330",
+    "Yoshita Punnati": "22BTRCN331",
+    "Pavan O C": "22BTREC026",
+    "Anusha Hiregoudar": "22BTREI002",
+    "Nisha p": "22BTTCN003",
+    "RAGHAVAN S": "22BTTCN004"
+};
+
+
+        function updateUSN() {
+            const nameSelect = document.getElementById('name');
+            const usnInput = document.getElementById('usn');
+            const selectedName = nameSelect.value;
+            usnInput.value = studentData[selectedName] || '';
+        }
+
+        function saveAttendance() {
+            const name = document.getElementById('name').value;
+            const usn = document.getElementById('usn').value;
+            const course = document.getElementById('course').value;
+            const attendance = document.getElementById('attendance').value;
+            const date = document.getElementById('date').value;
+
+            if (name && usn && course && attendance && date) {
+                let attendanceRecords = JSON.parse(localStorage.getItem('attendanceRecords')) || [];
+                attendanceRecords.push({ name, usn, course, attendance, date });
+                localStorage.setItem('attendanceRecords', JSON.stringify(attendanceRecords));
+                alert('Attendance saved locally.');
+            } else {
+                alert('Please fill out all fields.');
+            }
+        }
+
+        function loadCurrentDate() {
+            const dateInput = document.getElementById('date');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.value = today;
+        }
+    </script>
+</head>
+<body onload="loadCurrentDate()">
+    <header>
+        <h1>Mark Attendance</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="report.html">View Reports</a></li>
+                <li><a href="report_by_course.html"> Individual Report</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <form onsubmit="saveAttendance(); return false;">
+                <label for="name">Name:</label>
+                <select id="name" name="name" onchange="updateUSN()">
+                    <option value="">Select a student</option>
+                    <option value="Kuushal Kamboji">Kuushal Kamboji</option>
+                    <option value="Mathew Abraham Leo">Mathew Abraham Leo</option>
+                    <option value="MANOJ KUMAR LINGUTLA">MANOJ KUMAR LINGUTLA</option>
+                    <option value="Neel Kariappa M M">Neel Kariappa M M</option>
+                    <option value="Sashank Maddula">Sashank Maddula</option>
+                    <option value="Rohith Madineni">Rohith Madineni</option>
+                    <option value="Rakshith Kumar.M">Rakshith Kumar.M</option>
+                    <option value="Mohamed Faiz V S">Mohamed Faiz V S</option>
+                    <option value="SAI HASHWANTH REDDY M">SAI HASHWANTH REDDY M</option>
+                    <option value="Deepthi. Mullaguru">Deepthi. Mullaguru</option>
+                    <option value="Sai venkata praneeth myla">Sai venkata praneeth myla</option>
+                    <option value="N Bala Mohan">N Bala Mohan</option>
+                    <option value="Nakul Govind S">Nakul Govind S</option>
+                    <option value="SANTHOSH REDDY NAMALA">SANTHOSH REDDY NAMALA</option>
+                    <option value="MOURYA VARDHAN GOWD NEELLA">MOURYA VARDHAN GOWD NEELLA</option>
+                    <option value="Punarvika Neeluri">Punarvika Neeluri</option>
+                    <option value="Nikhil Reddy K">Nikhil Reddy K</option>
+                    <option value="Niraj Shah Rauniyar">Niraj Shah Rauniyar</option>
+                    <option value="Omswaroop T M">Omswaroop T M</option>
+                    <option value="PARAS">PARAS</option>
+                    <option value="Parth Jain">Parth Jain</option>
+                    <option value="Sharani Sai.P">Sharani Sai.P</option>
+                    <option value="Pooja.H">Pooja.H</option>
+                    <option value="Rahul Rajasekharan Menon">Rahul Rajasekharan Menon</option>
+                    <option value="Rakesh M">Rakesh M</option>
+                    <option value="RATHAN S">RATHAN S</option>
+                    <option value="Rohith s">Rohith s</option>
+                    <option value="saivenkatpujari224@gmail.com">saivenkatpujari224@gmail.com</option>
+                    <option value="Sanskriti Saxena">Sanskriti Saxena</option>
+                    <option value="Shaik Nida Fathima">Shaik Nida Fathima</option>
+                    <option value="Shashank. S">Shashank. S</option>
+                    <option value="Shikhar S">Shikhar S</option>
+                    <option value="Shreya Badarish">Shreya Badarish</option>
+                    <option value="Shreya k">Shreya k</option>
+                    <option value="Shrutakeval H A">Shrutakeval H A</option>
+                    <option value="Shyam Sundar G">Shyam Sundar G</option>
+                    <option value="Sindhu R">Sindhu R</option>
+                    <option value="Sirrisathwik">Sirrisathwik</option>
+                    <option value="Sreenath S">Sreenath S</option>
+                    <option value="Sreerag Pradeepan">Sreerag Pradeepan</option>
+                    <option value="SREERAM ES">SREERAM ES</option>
+                    <option value="Sudeeksha Bhat">Sudeeksha Bhat</option>
+                    <option value="Sushmith S Mokashi">Sushmith S Mokashi</option>
+                    <option value="BHAVYA SRI TALARI">BHAVYA SRI TALARI</option>
+                    <option value="Tamil Iniyan KS">Tamil Iniyan KS</option>
+                    <option value="Tanni Saha Puja">Tanni Saha Puja</option>
+                    <option value="Tanvi S">Tanvi S</option>
+                    <option value="Thanu Shree K">Thanu Shree K</option>
+                    <option value="Trishlaa S">Trishlaa S</option>
+                    <option value="Mokshith V">Mokshith V</option>
+                    <option value="Hima Bindhu .V">Hima Bindhu .V</option>
+                    <option value="Bindhu sri reddy.V">Bindhu sri reddy.V</option>
+                    <option value="Varshitha Y">Varshitha Y</option>
+                    <option value="Varun.R">Varun.R</option>
+                    <option value="Varuni L">Varuni L</option>
+                    <option value="Vasundhara parihar">Vasundhara parihar</option>
+                    <option value="YASH KUMAR JAIN M">YASH KUMAR JAIN M</option>
+                    <option value="YASHWANT PATEL">YASHWANT PATEL</option>
+                    <option value="Chandana.Y">Chandana.Y</option>
+                    <option value="Yoshita Punnati">Yoshita Punnati</option>
+                    <option value="Pavan O C">Pavan O C</option>
+                    <option value="Anusha Hiregoudar">Anusha Hiregoudar</option>
+                    <option value="Nisha p">Nisha p</option>
+                    <option value="RAGHAVAN S">RAGHAVAN S</option>
+                </select>
+                <br>
+
+                <label for="usn">USN:</label>
+                <input type="text" id="usn" name="usn" readonly><br>
+
+                <label for="course">Course:</label>
+                <select id="course" name="course">
+                    <option value="FAI">FAI</option>
+                    <option value="EML">EML</option>
+                    <option value="NOSQL">NOSQL</option>
+                    <option value="BCS">BCS</option>
+                    <option value="ACN">ACN</option>
+                </select><br>
+
+                <label for="attendance">Attendance:</label>
+                <select id="attendance" name="attendance">
+                    <option value="present">Present</option>
+                    <option value="absent">Absent</option>
+                </select><br>
+
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date"><br>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Attendance Management System</p>
+    </footer>
+</body>
+</html>
