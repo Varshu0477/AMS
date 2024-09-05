@@ -105,7 +105,11 @@ function saveAttendance() {
             attendanceRecords.push({ name, usn, course, attendance, date });
             localStorage.setItem('attendanceRecords', JSON.stringify(attendanceRecords));
             alert('Attendance saved locally.');
-            document.querySelector('form').reset(); // Reset the form
+            
+            document.getElementById('name').value = '';
+            document.getElementById('usn').value = '';
+            document.getElementById('course').value = 'FAI';
+            document.getElementById('attendance').value = 'present'; // Default value for attendance
         }
     } else {
         alert('Please fill out all fields.');
