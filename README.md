@@ -1,4 +1,4 @@
-# 📚 Attendance Management System
+# 📚 Attendance Management System 🎓
 
 Welcome to the **Attendance Management System**! This project is designed to streamline the process of tracking attendance for students, providing an efficient and user-friendly interface for both marking and viewing attendance.
 
