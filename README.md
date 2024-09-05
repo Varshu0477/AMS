@@ -34,14 +34,9 @@ Here are some screenshots of the project:
 
 ## ⚖️ License
 
-This project is licensed under the **MIT License**. Feel free to use the code, but remember to respect the original author’s work! 🙌
-
-## 📝 How to Use
-
-1. Clone this repository:  
-
-## License
-
 This project is proprietary and is not available for copying, modification, or redistribution. You are not permitted to use any part of this project without explicit permission from the author.
 
 All Rights Reserved. © Varshitha Y 2024
+
+
+
