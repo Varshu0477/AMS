@@ -22,9 +22,9 @@ The system offers the following features:
 
 Here are some screenshots of the project:
 
-![Attendance Form](./images/attendance_form.png)
+![Attendance Form](./Images/attendance.png)
 
-![Attendance Report](./images/attendance_report.png)
+![Attendance Report](./images/report.png)
 
 ## 🌟 Features
 
